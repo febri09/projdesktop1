@@ -22,6 +22,12 @@ public class DataPendudukPNP extends javax.swing.JFrame {
     public DataPendudukPNP() {
         initComponents();
     }
+    private void sum(){
+        DefaultTableModel dataModel = (DefaultTableModel) table.getModel();
+        int jumlah = dataModel.getRowCount();
+     
+        jmlh.setText(Integer.toString(jumlah));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +97,6 @@ public class DataPendudukPNP extends javax.swing.JFrame {
 
         table.setBackground(new java.awt.Color(153, 255, 255));
         table.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        table.setForeground(new java.awt.Color(255, 255, 255));
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -181,6 +186,11 @@ public class DataPendudukPNP extends javax.swing.JFrame {
 
         insert.setBackground(new java.awt.Color(0, 204, 204));
         insert.setText("Insert");
+        insert.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                insertMouseClicked(evt);
+            }
+        });
         insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertActionPerformed(evt);
@@ -194,6 +204,11 @@ public class DataPendudukPNP extends javax.swing.JFrame {
 
         delete.setBackground(new java.awt.Color(0, 204, 204));
         delete.setText("Delete");
+        delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                deleteMouseClicked(evt);
+            }
+        });
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteActionPerformed(evt);
@@ -214,11 +229,15 @@ public class DataPendudukPNP extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tableMouseClicked
-
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_insertActionPerformed
+
+    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteActionPerformed
+
+    private void insertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_insertMouseClicked
         // TODO add your handling code here:
         String jk="";
         if(lk.isSelected()){
@@ -236,18 +255,27 @@ public class DataPendudukPNP extends javax.swing.JFrame {
         list.add(nip.getText());
         list.add(alamat.getText());
         dataModel.addRow(list.toArray());
-    }//GEN-LAST:event_insertActionPerformed
+        sum();
+        JOptionPane.showMessageDialog(null, "Contoh : Data anda berhasil "+ "tersimpan !!", "Title : Pesan Informasi ???",
+        JOptionPane.INFORMATION_MESSAGE); 
+    }//GEN-LAST:event_insertMouseClicked
 
-    private void deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteActionPerformed
+    private void deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteMouseClicked
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Yakin membersihkan data?");
         DefaultTableModel dataModel = (DefaultTableModel) table.getModel();
         if(table.getRowCount() >0){
             for (int i = table.getRowCount() - 1; i > -1; i--){
                 dataModel.removeRow(i);
+                jmlh.setText("");
+        JOptionPane.showMessageDialog(null, "Yakin membersihkan tabel?", "Title : Pesan Error ???", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_deleteActionPerformed
+    }//GEN-LAST:event_deleteMouseClicked
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tableMouseClicked
 
     /**
      * @param args the command line arguments
